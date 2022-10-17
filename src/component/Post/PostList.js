@@ -1,12 +1,13 @@
 import React from "react";
+import Card from "../Card";
+import ContentBar from "../Contentbar";
 
 const PostList = () => {
   return (
     <>
-      <div className="dashboard-navbar__body__page-title">Post List</div>
-      <div className="dashboard-navbar__body__content">
-        <div className="container-fluid"></div>
-      </div>
+      <ContentBar title="System > Post List">
+        <Card>Post List</Card>
+      </ContentBar>
     </>
   );
 };

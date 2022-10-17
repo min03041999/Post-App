@@ -143,22 +143,31 @@ svg {
   justify-content: space-between;
 }
 
+.dashboard-navbar__body__page-title {
+  color: #555555;
+  font-size: 0.9rem;
+  padding: 0.9375rem 1.875rem;
+  background: #F3F3F9;
+  transition: all .2s ease;
+}
+
 .dashboard-navbar__body {
   position: relative;
   padding: 0 1rem;
 }
 
-
-
+/* Dropdown  */
 .dropdown-group {
   display: none;
+  transition: 0.3s ease-in-out;
 }
 
 .dropdown-group.active {
   display: block;
   position: fixed;
-  top: 10%;
-  right: 2%;
+  top: 90px;
+  right: 2.5rem;
+  z-index: 50;
   background: #fff;
   border-radius: 8px;
   padding: 10px;
@@ -167,8 +176,24 @@ svg {
 
 .dropdown-item {
   cursor: pointer;
+  padding: 0.25rem 4.5rem 0.25rem 0.5rem
 }
 
 .dropdown-item__display {
   margin-left: 1rem;
+}
+
+/* Card */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: none;
+    padding: 1rem;
+    box-shadow: 6px 11px 41px -28px #a99de7;
+    border-radius: 0.25rem;
 }

@@ -1,7 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { AiOutlineAlignLeft, AiOutlineInfoCircle } from "react-icons/ai";
-import { BiLogOut } from "react-icons/bi";
+import {
+  AiOutlineAlignLeft,
+  AiOutlineMail,
+  AiOutlineSetting,
+  AiOutlineUser,
+  AiOutlineLogout,
+} from "react-icons/ai";
 
 import Dropdown from "../component/Dropdown";
 import DropdownItem from "../component/DropdownItem";
@@ -15,14 +20,28 @@ const Navbar = (props) => {
 
   const dropdownItem = [
     {
-      icon: <AiOutlineInfoCircle />,
-      display: "Info",
+      icon: <AiOutlineSetting />,
+      display: "Setting",
       click: () => {
         console.log("123");
       },
     },
     {
-      icon: <BiLogOut />,
+      icon: <AiOutlineUser />,
+      display: "Profie",
+      click: () => {
+        console.log("123");
+      },
+    },
+    {
+      icon: <AiOutlineMail />,
+      display: "My Messages",
+      click: () => {
+        console.log("123");
+      },
+    },
+    {
+      icon: <AiOutlineLogout />,
       display: "Logout",
       click: () => {
         dispatch(logout());
