@@ -38,7 +38,6 @@ const LoginPage = () => {
                           </div>
                           <input
                             type="email"
-                            value="test@test.com"
                             className="form-control"
                             placeholder="Enter Email"
                             {...register("email", { required: true })}
@@ -62,7 +61,6 @@ const LoginPage = () => {
                           </div>
                           <input
                             type="password"
-                            value="123456789"
                             className="form-control"
                             placeholder="Enter Password"
                             {...register("password", { required: true })}

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bitter:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 * {
   position: relative;
   margin: 0;
@@ -11,6 +12,19 @@
 
 a {
   text-decoration: none;
+  color: #000;
+}
+
+ol, ul, dl {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ol, ul {
+  padding-left: 0;
+}
+li {
+  padding-bottom: 0;
 }
 
 button {
@@ -74,7 +88,37 @@ svg {
   height: 100vh;
   background-color: #fff;
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 0rem;
+}
+
+.sidebar__title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.8rem;
+  padding: 1rem 1.5rem 0.3rem;
+}
+
+.link-item {
+  padding: 1rem 1.75rem;
+}
+
+.link-item.active {
+  background: #F3F1FA;
+}
+
+.link-item > a {
+  color: #464a53;
+}
+
+.link-item > a:hover {
+  color: #0d6efd;
+}
+
+.link-item.active > a {
+  color: #000;
+}
+
+.dashboard-sidebar__navbar__item {
+  margin-left: 1.5rem;
 }
 
 .dashboard-navbar {
@@ -99,7 +143,32 @@ svg {
   justify-content: space-between;
 }
 
+.dashboard-navbar__body {
+  position: relative;
+  padding: 0 1rem;
+}
 
 
 
+.dropdown-group {
+  display: none;
+}
 
+.dropdown-group.active {
+  display: block;
+  position: fixed;
+  top: 10%;
+  right: 2%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 6px 11px 41px -28px #a99de7;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+.dropdown-item__display {
+  margin-left: 1rem;
+}
