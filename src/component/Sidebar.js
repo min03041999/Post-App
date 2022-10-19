@@ -30,7 +30,6 @@ const Sidebar = (props) => {
   ];
   const { pathname } = useLocation();
   const active = headerNav.findIndex((e) => e.path === pathname);
-
   return (
     <div className={`dashboard-sidebar ${props.show ? "active" : ""}`}>
       <div className="dashboard-sidebar__header">Post App</div>

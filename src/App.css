@@ -5,7 +5,6 @@
   position: relative;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
 }
@@ -193,7 +192,7 @@ svg {
     background-color: #fff;
     background-clip: border-box;
     border: none;
-    padding: 1rem;
+    padding: 1.5rem;
     box-shadow: 6px 11px 41px -28px #a99de7;
     border-radius: 0.25rem;
 }

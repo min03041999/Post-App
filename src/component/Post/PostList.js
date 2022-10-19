@@ -3,23 +3,29 @@ import Card from "../Card";
 import ContentBar from "../Contentbar";
 import IconButton from "../IconButton";
 
-import {
-  Table,
-  Row,
-  Col,
-  Text,
-  Grid,
-  Button,
-  Tooltip,
-} from "@nextui-org/react";
+import { Table, Row, Col, Text, Grid, Button } from "@nextui-org/react";
 
 import { AiOutlineEye, AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 import postApi from "../../api/PostApi";
+import PostDetail from "./PostDetail";
 
 const PostList = () => {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await postApi.getPostList();
+        if (res.status === 200) {
+          res.data && mapData(res.data.posts);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const mapData = (data) => {
     const newData = data.map((item, index) => ({
@@ -33,24 +39,6 @@ const PostList = () => {
     }));
     setItems(newData);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const res = await postApi.getPostList();
-
-        if (res.status === 200) {
-          res.data && mapData(res.data.posts);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
 
   const columns = [
     { name: "TITLE", uid: "title" },
@@ -114,7 +102,7 @@ const PostList = () => {
         return (
           <Row justify="center" align="center">
             <Col css={{ d: "flex" }}>
-              <IconButton onClick={() => console.log("View user", post.id)}>
+              <IconButton onClick={() => handlerDetailPost(post.id)}>
                 <AiOutlineEye size={20} fill="#13a452" />
               </IconButton>
             </Col>
@@ -133,6 +121,20 @@ const PostList = () => {
       default:
         return cellValue;
     }
+  };
+
+  // console.log(items);
+
+  //Modal
+  const [postId, setPostId] = useState();
+  const [check, setCheck] = useState();
+  const [visible, setVisible] = useState(false);
+
+  //Detail
+  const handlerDetailPost = (id) => {
+    setPostId(id);
+    setCheck("PostDetail");
+    setVisible(true);
   };
 
   return (
@@ -178,6 +180,11 @@ const PostList = () => {
           </Table>
         </Card>
       </ContentBar>
+
+      {/* Detail */}
+      {check === "PostDetail" && (
+        <PostDetail postId={postId} visible={visible} setVisible={setVisible} />
+      )}
     </>
   );
 };

@@ -14,11 +14,15 @@ const slice = createSlice({
   reducers: {
     loginSuccess: (state, action) => {
       state.auth = action?.payload.email;
+      const remainingMilliseconds = 60 * 60 * 1000;
+      const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
+      localStorage.setItem("expiryDate", expiryDate.toISOString());
       localStorage.setItem("auth", JSON.stringify(action?.payload?.email));
       localStorage.setItem("token", JSON.stringify(action?.payload?.token));
     },
     logoutSuccess: (state, action) => {
       state.auth = null;
+      localStorage.removeItem("expiryDate");
       localStorage.removeItem("auth");
       localStorage.removeItem("token");
     },

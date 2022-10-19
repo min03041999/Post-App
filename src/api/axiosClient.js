@@ -13,7 +13,8 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     if (token) {
-      config.header["Authorization"] = `Token ${token}`;
+      // config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
+      config.headers["x-access-token"] = token; // for Node.js Express back-end
     }
     return config;
   },

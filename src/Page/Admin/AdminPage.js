@@ -26,6 +26,26 @@ const AdminPage = () => {
   //     window.removeEventListener("beforeunload", handleTabClose);
   //   };
   // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const expiryDate = localStorage.getItem("expiryDate");
+    if (!token || !expiryDate) {
+      return;
+    }
+    if (new Date(expiryDate) <= new Date()) {
+      dispatch(logout());
+      return;
+    }
+    const remainingMilliseconds =
+      new Date(expiryDate).getTime() - new Date().getTime();
+    autoLogout(remainingMilliseconds);
+  }, []);
+
+  const autoLogout = (milliseconds) => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, milliseconds);
+  };
 
   return (
     <>
