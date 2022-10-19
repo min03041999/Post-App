@@ -3,7 +3,15 @@ import Card from "../Card";
 import ContentBar from "../Contentbar";
 import IconButton from "../IconButton";
 
-import { Table, Row, Col, Text, Grid, Button } from "@nextui-org/react";
+import {
+  Table,
+  Row,
+  Col,
+  Text,
+  Grid,
+  Button,
+  Pagination,
+} from "@nextui-org/react";
 
 import { AiOutlineEye, AiFillEdit, AiFillDelete } from "react-icons/ai";
 
@@ -12,12 +20,16 @@ import PostDetail from "./PostDetail";
 
 const PostList = () => {
   const [items, setItems] = useState([]);
+  const [totalItem, setTotalItem] = useState();
+  const [page, setPage] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await postApi.getPostList();
+        const res = await postApi.getPostList(page);
         if (res.status === 200) {
+          const page = Math.ceil(res.data.totalItems / 2);
+          setTotalItem(page);
           res.data && mapData(res.data.posts);
         }
       } catch (error) {
@@ -25,7 +37,7 @@ const PostList = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [page]);
 
   const mapData = (data) => {
     const newData = data.map((item, index) => ({
@@ -150,12 +162,13 @@ const PostList = () => {
             </Grid>
           </Grid.Container>
           <Table
-            aria-label="Example table with custom cells"
+            bordered
+            shadow={false}
+            color="secondary"
             css={{
               height: "auto",
               minWidth: "100%",
             }}
-            selectionMode="none"
           >
             <Table.Header columns={columns}>
               {(column) => (
@@ -178,6 +191,13 @@ const PostList = () => {
               )}
             </Table.Body>
           </Table>
+
+          <Pagination
+            total={totalItem}
+            initialPage={1}
+            style={{ marginTop: "10px" }}
+            onChange={(page) => setPage(page)}
+          />
         </Card>
       </ContentBar>
 
