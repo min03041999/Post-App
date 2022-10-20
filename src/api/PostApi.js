@@ -10,6 +10,12 @@ const postApi = {
     const url = `feed/post/${id}`;
     return api.get(url);
   },
+
+  postPost: (data) => {
+    console.log(data);
+    const url = "feed/post";
+    return api.post(url, data);
+  },
 };
 
 export default postApi;

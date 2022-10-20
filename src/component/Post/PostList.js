@@ -17,11 +17,12 @@ import { AiOutlineEye, AiFillEdit, AiFillDelete } from "react-icons/ai";
 
 import postApi from "../../api/PostApi";
 import PostDetail from "./PostDetail";
+import PostForm from "./PostForm";
 
 const PostList = () => {
   const [items, setItems] = useState([]);
   const [totalItem, setTotalItem] = useState();
-  const [page, setPage] = useState();
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -114,12 +115,12 @@ const PostList = () => {
         return (
           <Row justify="center" align="center">
             <Col css={{ d: "flex" }}>
-              <IconButton onClick={() => handlerDetailPost(post.id)}>
+              <IconButton onClick={() => handlerPostDetail(post.id)}>
                 <AiOutlineEye size={20} fill="#13a452" />
               </IconButton>
             </Col>
             <Col css={{ d: "flex" }}>
-              <IconButton onClick={() => console.log("View user", post.id)}>
+              <IconButton onClick={() => handlerPostEdit(post.id)}>
                 <AiFillEdit size={20} fill="#f5a524" />
               </IconButton>
             </Col>
@@ -143,9 +144,20 @@ const PostList = () => {
   const [visible, setVisible] = useState(false);
 
   //Detail
-  const handlerDetailPost = (id) => {
+  const handlerPostDetail = (id) => {
     setPostId(id);
     setCheck("PostDetail");
+    setVisible(true);
+  };
+
+  const handlerPostAdd = () => {
+    setCheck("PostAdd");
+    setVisible(true);
+  };
+
+  const handlerPostEdit = (id) => {
+    setPostId(id);
+    setCheck("PostEdit");
     setVisible(true);
   };
 
@@ -156,7 +168,12 @@ const PostList = () => {
           <h2>Post List</h2>
           <Grid.Container gap={2}>
             <Grid>
-              <Button color="primary" size="sm" auto>
+              <Button
+                color="primary"
+                size="sm"
+                auto
+                onClick={() => handlerPostAdd()}
+              >
                 Add Post
               </Button>
             </Grid>
@@ -204,6 +221,12 @@ const PostList = () => {
       {/* Detail */}
       {check === "PostDetail" && (
         <PostDetail postId={postId} visible={visible} setVisible={setVisible} />
+      )}
+      {check === "PostAdd" && (
+        <PostForm visible={visible} setVisible={setVisible} />
+      )}
+      {check === "PostEdit" && (
+        <PostForm postId={postId} visible={visible} setVisible={setVisible} />
       )}
     </>
   );

@@ -65,7 +65,7 @@ const PostDetail = (props) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color="error" onClick={closeHandler}>
+          <Button auto color="error" onClick={closeHandler}>
             Close
           </Button>
         </Modal.Footer>
