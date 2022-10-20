@@ -164,15 +164,6 @@ const PostList = () => {
   };
 
   const handlerPostDelete = (id) => {
-    // try {
-    //   const res = await postApi.deletePost(id);
-    //   if (res.status === 200) {
-    //     fetchData();
-    //     console.log("Deleting is successfully");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

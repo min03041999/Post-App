@@ -19,10 +19,16 @@ const PostForm = (props) => {
     setImgProduct(file);
   };
 
-  const [imgProduct, setImgProduct] = useState();
-
+  const [imgProduct, setImgProduct] = useState(null);
+  console.log(imgProduct);
   //Form
-  const { register, handleSubmit } = useForm();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = async (data) => {
     const formData = new FormData();
@@ -43,6 +49,8 @@ const PostForm = (props) => {
           }
           closeHandler();
           props.fetchData();
+          reset({ title: "", content: "" });
+          setImgProduct(null);
           return res.data.post;
         })
         .catch((err) => {
@@ -71,6 +79,7 @@ const PostForm = (props) => {
               label="Title"
               placeholder="Enter your title."
             />
+            {errors.title && <p>Title is required.</p>}
             <Textarea
               {...register("content")}
               label="Content"
