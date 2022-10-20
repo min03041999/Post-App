@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react";
 
 import { AiOutlineEye, AiFillEdit, AiFillDelete } from "react-icons/ai";
+import Swal from "sweetalert2";
 
 import postApi from "../../api/PostApi";
 import PostDetail from "./PostDetail";
@@ -24,19 +25,20 @@ const PostList = () => {
   const [totalItem, setTotalItem] = useState();
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await postApi.getPostList(page);
-        if (res.status === 200) {
-          const page = Math.ceil(res.data.totalItems / 2);
-          setTotalItem(page);
-          res.data && mapData(res.data.posts);
-        }
-      } catch (error) {
-        console.log(error);
+  const fetchData = async () => {
+    try {
+      const res = await postApi.getPostList(page);
+      if (res.status === 200) {
+        const page = Math.ceil(res.data.totalItems / 3);
+        setTotalItem(page);
+        res.data && mapData(res.data.posts);
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, [page]);
 
@@ -125,7 +127,7 @@ const PostList = () => {
               </IconButton>
             </Col>
             <Col css={{ d: "flex" }}>
-              <IconButton onClick={() => console.log("View user", post.id)}>
+              <IconButton onClick={() => handlerPostDelete(post.id)}>
                 <AiFillDelete size={20} fill="#f31260" />
               </IconButton>
             </Col>
@@ -159,6 +161,42 @@ const PostList = () => {
     setPostId(id);
     setCheck("PostEdit");
     setVisible(true);
+  };
+
+  const handlerPostDelete = (id) => {
+    // try {
+    //   const res = await postApi.deletePost(id);
+    //   if (res.status === 200) {
+    //     fetchData();
+    //     console.log("Deleting is successfully");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: "OK",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#0072f5",
+      cancelButtonColor: "#d33",
+      icon: "warning",
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        try {
+          const res = await postApi.deletePost(id);
+          if (res.status === 200) {
+            Swal.fire("Deleting is successfully!", "", "success");
+            fetchData();
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    });
   };
 
   return (
@@ -223,7 +261,11 @@ const PostList = () => {
         <PostDetail postId={postId} visible={visible} setVisible={setVisible} />
       )}
       {check === "PostAdd" && (
-        <PostForm visible={visible} setVisible={setVisible} />
+        <PostForm
+          visible={visible}
+          setVisible={setVisible}
+          fetchData={fetchData}
+        />
       )}
       {check === "PostEdit" && (
         <PostForm postId={postId} visible={visible} setVisible={setVisible} />

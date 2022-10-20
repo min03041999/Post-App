@@ -42,6 +42,7 @@ const PostForm = (props) => {
             throw new Error("Creating a post failed!");
           }
           closeHandler();
+          props.fetchData();
           return res.data.post;
         })
         .catch((err) => {

@@ -12,9 +12,13 @@ const postApi = {
   },
 
   postPost: (data) => {
-    console.log(data);
     const url = "feed/post";
     return api.post(url, data);
+  },
+
+  deletePost: (id) => {
+    const url = `feed/post/${id}`;
+    return api.delete(url);
   },
 };
 
