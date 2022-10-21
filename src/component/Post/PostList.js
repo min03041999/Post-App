@@ -11,6 +11,7 @@ import {
   Grid,
   Button,
   Pagination,
+  Input,
 } from "@nextui-org/react";
 
 import { AiOutlineEye, AiFillEdit, AiFillDelete } from "react-icons/ai";
@@ -195,8 +196,8 @@ const PostList = () => {
       <ContentBar title="System > Post List">
         <Card>
           <h2>Post List</h2>
-          <Grid.Container gap={2}>
-            <Grid>
+          <Grid.Container gap={2} alignItems="center">
+            <Grid xs={9}>
               <Button
                 color="primary"
                 size="sm"
@@ -204,6 +205,12 @@ const PostList = () => {
                 onClick={() => handlerPostAdd()}
               >
                 Add Post
+              </Button>
+            </Grid>
+            <Grid xs={3} justify="space-between" alignItems="center">
+              <Input placeholder="Search title..." width="230px" />
+              <Button color="primary" size="sm" auto>
+                Search
               </Button>
             </Grid>
           </Grid.Container>
