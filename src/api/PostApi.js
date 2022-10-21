@@ -16,6 +16,11 @@ const postApi = {
     return api.post(url, data);
   },
 
+  editPost: (id, data) => {
+    const url = `feed/post/${id}`;
+    return api.put(url, data);
+  },
+
   deletePost: (id) => {
     const url = `feed/post/${id}`;
     return api.delete(url);

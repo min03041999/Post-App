@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Modal, Text, Button, Input, Textarea } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 
@@ -14,14 +14,28 @@ const PostForm = (props) => {
   const imgRef = useRef();
   const handleInputImgChange = () => {
     const file = imgRef.current.files[0];
-    console.log(file.name);
+    // console.log(file.name);
     file.preview = URL.createObjectURL(file);
     setImgProduct(file);
   };
 
-  const [imgProduct, setImgProduct] = useState(null);
-  console.log(imgProduct);
+  const [imgProduct, setImgProduct] = useState();
   //Form
+  // const [post, setPost] = useState({});
+  const id = props.postId;
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await postApi.getPost(id);
+        if (res.status === 200) {
+          res.data.post && reset(res.data.post);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPost();
+  }, [id]);
 
   const {
     register,
@@ -39,7 +53,22 @@ const PostForm = (props) => {
       imgRef.current.files[0] ? imgRef.current.files[0] : imgProduct
     );
 
-    if (props.Id) {
+    if (id) {
+      await postApi
+        .editPost(id, formData)
+        .then((res) => {
+          if (res.status !== 200 && res.status !== 201) {
+            throw new Error("Editing a post failed!");
+          }
+          closeHandler();
+          props.fetchData();
+          reset({ title: "", content: "" });
+          setImgProduct(null);
+          return res.data.post;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       await postApi
         .postPost(formData)

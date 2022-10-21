@@ -40,7 +40,7 @@ const PostList = () => {
 
   useEffect(() => {
     fetchData();
-  }, [page]);
+  }, [page, items]);
 
   const mapData = (data) => {
     const newData = data.map((item, index) => ({
