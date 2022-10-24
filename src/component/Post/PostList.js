@@ -23,25 +23,26 @@ import PostForm from "./PostForm";
 
 const PostList = () => {
   const [items, setItems] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(0);
   const [totalItem, setTotalItem] = useState();
   const [page, setPage] = useState(1);
 
-  const fetchData = async () => {
-    try {
-      const res = await postApi.getPostList(page);
-      if (res.status === 200) {
-        const page = Math.ceil(res.data.totalItems / 3);
-        setTotalItem(page);
-        res.data && mapData(res.data.posts);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await postApi.getPostList(page);
+        if (res.status === 200) {
+          const page = Math.ceil(res.data.totalItems / 3);
+          setTotalItem(page);
+          res.data && mapData(res.data.posts);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchData();
-  }, [page, items]);
+  }, [page, refreshKey]);
 
   const mapData = (data) => {
     const newData = data.map((item, index) => ({
@@ -139,8 +140,6 @@ const PostList = () => {
     }
   };
 
-  // console.log(items);
-
   //Modal
   const [postId, setPostId] = useState();
   const [check, setCheck] = useState();
@@ -196,8 +195,8 @@ const PostList = () => {
       <ContentBar title="System > Post List">
         <Card>
           <h2>Post List</h2>
-          <Grid.Container gap={2} alignItems="center">
-            <Grid xs={9}>
+          <Grid.Container gap={2} alignItems="center" justify="space-between">
+            <Grid>
               <Button
                 color="primary"
                 size="sm"
@@ -207,7 +206,7 @@ const PostList = () => {
                 Add Post
               </Button>
             </Grid>
-            <Grid xs={3} justify="space-between" alignItems="center">
+            <Grid>
               <Input placeholder="Search title..." width="230px" />
               <Button color="primary" size="sm" auto>
                 Search
@@ -262,11 +261,16 @@ const PostList = () => {
         <PostForm
           visible={visible}
           setVisible={setVisible}
-          fetchData={fetchData}
+          setRefreshKey={setRefreshKey}
         />
       )}
       {check === "PostEdit" && (
-        <PostForm postId={postId} visible={visible} setVisible={setVisible} />
+        <PostForm
+          postId={postId}
+          visible={visible}
+          setVisible={setVisible}
+          setRefreshKey={setRefreshKey}
+        />
       )}
     </>
   );

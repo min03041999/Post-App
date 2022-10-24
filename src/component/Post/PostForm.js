@@ -23,19 +23,21 @@ const PostForm = (props) => {
   //Form
   // const [post, setPost] = useState({});
   const id = props.postId;
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const res = await postApi.getPost(id);
-        if (res.status === 200) {
-          res.data.post && reset(res.data.post);
+  if (id) {
+    useEffect(() => {
+      const fetchPost = async () => {
+        try {
+          const res = await postApi.getPost(id);
+          if (res.status === 200) {
+            res.data.post && reset(res.data.post);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchPost();
-  }, [id]);
+      };
+      fetchPost();
+    }, [id]);
+  }
 
   const {
     register,
@@ -61,9 +63,9 @@ const PostForm = (props) => {
             throw new Error("Editing a post failed!");
           }
           closeHandler();
-          props.fetchData();
           reset({ title: "", content: "" });
           setImgProduct(null);
+          props.setRefreshKey((oldKey) => oldKey + 1);
           return res.data.post;
         })
         .catch((err) => {
@@ -77,9 +79,9 @@ const PostForm = (props) => {
             throw new Error("Creating a post failed!");
           }
           closeHandler();
-          props.fetchData();
           reset({ title: "", content: "" });
           setImgProduct(null);
+          props.setRefreshKey((oldKey) => oldKey + 1);
           return res.data.post;
         })
         .catch((err) => {
