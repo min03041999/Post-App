@@ -41,6 +41,7 @@ const LoginPage = () => {
                             className="form-control"
                             placeholder="Enter Email"
                             {...register("email", { required: true })}
+                            value="administrator@test.com"
                             autoComplete="off"
                           />
                         </div>
@@ -63,6 +64,7 @@ const LoginPage = () => {
                             type="password"
                             className="form-control"
                             placeholder="Enter Password"
+                            value="030499"
                             {...register("password", { required: true })}
                             autoComplete="off"
                           />

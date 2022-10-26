@@ -50,7 +50,7 @@ const PostList = () => {
       title: item.title,
       content: item.content,
       imageUrl: "http://localhost:8080/" + item.imageUrl,
-      creator: item.creator.name,
+      creator: item.creator,
       createdAt: item.createdAt,
       updatedAt: item.updateAt,
     }));
@@ -99,7 +99,11 @@ const PostList = () => {
         return (
           <Col>
             <Row>
-              <Text b size={14} css={{ tt: "capitalize" }}>
+              <Text
+                b
+                size={14}
+                css={{ tt: "capitalize", whiteSpace: "pre-wrap" }}
+              >
                 {cellValue}
               </Text>
             </Row>
@@ -181,7 +185,7 @@ const PostList = () => {
           const res = await postApi.deletePost(id);
           if (res.status === 200) {
             Swal.fire("Deleting is successfully!", "", "success");
-            fetchData();
+            setRefreshKey((oldKey) => oldKey + 1);
           }
         } catch (error) {
           console.log(error);
@@ -206,7 +210,9 @@ const PostList = () => {
                 Add Post
               </Button>
             </Grid>
-            <Grid>
+            <Grid
+              style={{ display: "flex", gap: "10px", alignItems: "center" }}
+            >
               <Input placeholder="Search title..." width="230px" />
               <Button color="primary" size="sm" auto>
                 Search

@@ -21,7 +21,6 @@ const PostForm = (props) => {
 
   const [imgProduct, setImgProduct] = useState();
   //Form
-  // const [post, setPost] = useState({});
   const id = props.postId;
   if (id) {
     useEffect(() => {
@@ -39,12 +38,7 @@ const PostForm = (props) => {
     }, [id]);
   }
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
     const formData = new FormData();
@@ -63,7 +57,6 @@ const PostForm = (props) => {
             throw new Error("Editing a post failed!");
           }
           closeHandler();
-          reset({ title: "", content: "" });
           setImgProduct(null);
           props.setRefreshKey((oldKey) => oldKey + 1);
           return res.data.post;
@@ -110,7 +103,6 @@ const PostForm = (props) => {
               label="Title"
               placeholder="Enter your title."
             />
-            {errors.title && <p>Title is required.</p>}
             <Textarea
               {...register("content")}
               label="Content"
