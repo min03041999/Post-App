@@ -53,17 +53,19 @@ const PostDetail = (props) => {
             Detail Post
           </Text>
         </Modal.Header>
-        <Modal.Body>
+        <>
           {Object.keys(post).length !== 0 && (
             <>
-              <img src={post.imageUrl} alt={post.title} />
-              <Text b size={25}>
-                {post.title}
-              </Text>
-              <Text size={15}>{post.content}</Text>
+              <img src={post.imageUrl} alt={post.title} height="300" />
+              <Modal.Body>
+                <Text b size={25}>
+                  {post.title}
+                </Text>
+                <Text size={15}>{post.content}</Text>
+              </Modal.Body>
             </>
           )}
-        </Modal.Body>
+        </>
         <Modal.Footer>
           <Button auto color="error" onClick={closeHandler}>
             Close

@@ -32,7 +32,7 @@ const PostList = () => {
       try {
         const res = await postApi.getPostList(page);
         if (res.status === 200) {
-          const page = Math.ceil(res.data.totalItems / 3);
+          const page = Math.ceil(res.data.totalItems / 6);
           setTotalItem(page);
           res.data && mapData(res.data.posts);
         }
