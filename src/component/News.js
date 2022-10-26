@@ -88,20 +88,20 @@ const News = () => {
             Post
           </Text>
         </Grid>
-        <Grid xs={8}>
+        <Grid xs={8} style={{ display: "inline" }}>
           <Grid.Container gap={2} justify="center">
             {posts.map((item, index) => (
               <Grid xs={4} key={index}>
                 <MockItem item={item} />
               </Grid>
             ))}
-            <Pagination
-              total={totalItem}
-              initialPage={1}
-              style={{ marginTop: "20px" }}
-              onChange={(page) => setPage(page)}
-            />
           </Grid.Container>
+          <Pagination
+            total={totalItem}
+            initialPage={1}
+            style={{ marginTop: "20px" }}
+            onChange={(page) => setPage(page)}
+          />
         </Grid>
       </Grid.Container>
     </>

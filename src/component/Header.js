@@ -16,7 +16,7 @@ const Header = () => {
   ];
   return (
     <>
-      <Navbar>
+      <Navbar variant="sticky">
         <Navbar.Toggle showIn="xs" />
         <Navbar.Brand
           css={{

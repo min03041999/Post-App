@@ -42,7 +42,7 @@ const AdminPage = () => {
   }, []);
 
   const autoLogout = (milliseconds) => {
-    console.log(milliseconds);
+    // console.log(milliseconds);
     setTimeout(() => {
       dispatch(logout());
     }, milliseconds);
