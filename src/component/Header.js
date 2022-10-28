@@ -1,5 +1,6 @@
 import React from "react";
-import { Navbar, Link, Text, Avatar, Dropdown } from "@nextui-org/react";
+import { Navbar, Text, Avatar, Dropdown } from "@nextui-org/react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const collapseItems = [
@@ -17,7 +18,7 @@ const Header = () => {
   return (
     <>
       <Navbar variant="sticky">
-        <Navbar.Toggle showIn="xs" />
+        <Navbar.Toggle showIn="md" />
         <Navbar.Brand
           css={{
             "@xs": {
@@ -26,16 +27,14 @@ const Header = () => {
           }}
         >
           {/* <AcmeLogo /> */}
-          <Text b color="inherit" hideIn="xs">
+          <Text b color="inherit" hideIn="md">
             Animal Post
           </Text>
         </Navbar.Brand>
-        <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
-          <Navbar.Link isActive href="#">
-            News
-          </Navbar.Link>
-          <Navbar.Link href="#">Customers</Navbar.Link>
-          <Navbar.Link href="#">Contact</Navbar.Link>
+        <Navbar.Content enableCursorHighlight hideIn="md">
+          <Link to="">News</Link>
+          <Link to="customer">Customer</Link>
+          <Link to="contract">Contract</Link>
         </Navbar.Content>
         <Navbar.Content
           css={{
