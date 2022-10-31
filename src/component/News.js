@@ -26,7 +26,7 @@ const News = () => {
   const MockItem = (props) => {
     const item = props.item;
     return (
-      <Card>
+      <Card style={{ cursor: "pointer" }}>
         <Image
           width={320}
           height={250}
@@ -56,7 +56,7 @@ const News = () => {
   return (
     <>
       <Grid.Container gap={2} justify="center">
-        <Grid xs={4} style={{ display: "inline" }}>
+        <Grid xs={12} md={4} style={{ display: "inline" }}>
           <Text
             h1
             size={50}
@@ -88,10 +88,10 @@ const News = () => {
             Post
           </Text>
         </Grid>
-        <Grid xs={8} style={{ display: "inline" }}>
+        <Grid xs={12} md={8} style={{ display: "inline" }}>
           <Grid.Container gap={2} justify="center">
             {posts.map((item, index) => (
-              <Grid xs={4} key={index}>
+              <Grid xs={6} md={4} key={index}>
                 <MockItem item={item} />
               </Grid>
             ))}

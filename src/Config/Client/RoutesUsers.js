@@ -1,12 +1,17 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Animal from "../../component/News";
+import Customer from "../../component/Customer";
+import NotFound from "../../component/NotFound";
 
 const RoutesClient = () => {
   const { path } = useRouteMatch();
+
   return (
     <Switch>
-      <Route path={""} component={Animal} exact />
+      <Route path={`${path}`} component={Animal} exact />
+      <Route path={`${path}customer`} component={Customer} />
+      <Route component={NotFound} />
     </Switch>
   );
 };
