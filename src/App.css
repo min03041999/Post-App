@@ -102,23 +102,23 @@ svg {
   padding: 1rem 1.5rem 0.3rem;
 }
 
-.link-item {
+.sidebar-item {
   padding: 1rem 1.75rem;
 }
 
-.link-item.active {
+.sidebar-item.active {
   background: #F3F1FA;
 }
 
-.link-item>a {
+.sidebar-item>a {
   color: #464a53;
 }
 
-.link-item>a:hover {
+.sidebar-item>a:hover {
   color: #0d6efd;
 }
 
-.link-item.active>a {
+.sidebar-item.active>a {
   color: #000;
 }
 
@@ -202,4 +202,27 @@ svg {
   padding: 1.5rem;
   box-shadow: 6px 11px 41px -28px #a99de7;
   border-radius: 0.25rem;
+}
+
+/* Header */
+.navbar-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: 5px;
+  background-color: #0d6efd;
+}
+
+.collapse-item {
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
+}
+
+
+.collapse-item.active {
+  color: #096dd9;
 }

@@ -37,7 +37,10 @@ const Sidebar = (props) => {
         <ul>
           <h6 className="sidebar__title">SYSTEM</h6>
           {headerNav.map((e, i) => (
-            <li key={i} className={`link-item ${i === active ? "active" : ""}`}>
+            <li
+              key={i}
+              className={`sidebar-item ${i === active ? "active" : ""}`}
+            >
               <Link to={e.path}>
                 {e.icon}
                 <span className="dashboard-sidebar__navbar__item">

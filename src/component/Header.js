@@ -1,24 +1,30 @@
 import React from "react";
 import { Navbar, Text, Avatar, Dropdown } from "@nextui-org/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
-  const collapseItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+  const navbarItems = [
+    {
+      path: "/",
+      display: "News",
+    },
+    {
+      path: "/customer",
+      display: "Customer",
+    },
+    {
+      path: "/contact",
+      display: "Contact",
+    },
   ];
+
+  const { pathname } = useLocation();
+  const active = navbarItems.findIndex((e) => e.path === pathname);
+
   return (
     <>
       <Navbar variant="sticky">
-        <Navbar.Toggle showIn="md" />
+        <Navbar.Toggle showIn="sm" />
         <Navbar.Brand
           css={{
             "@xs": {
@@ -26,19 +32,24 @@ const Header = () => {
             },
           }}
         >
-          {/* <AcmeLogo /> */}
-          <Text b color="inherit" hideIn="md">
+          <Text b color="inherit" hideIn="sm">
             Animal Post
           </Text>
         </Navbar.Brand>
-        <Navbar.Content enableCursorHighlight hideIn="md">
-          <Link to="">News</Link>
-          <Link to="customer">Customer</Link>
-          <Link to="contract">Contract</Link>
+        <Navbar.Content enableCursorHighlight hideIn="sm">
+          {navbarItems.map((e, i) => (
+            <Link
+              to={e.path}
+              key={i}
+              className={`navbar-item ${i === active ? "active" : ""}`}
+            >
+              {e.display}
+            </Link>
+          ))}
         </Navbar.Content>
         <Navbar.Content
           css={{
-            "@xs": {
+            "@sm": {
               w: "12%",
               jc: "flex-end",
             },
@@ -50,7 +61,7 @@ const Header = () => {
                 <Avatar
                   bordered
                   as="button"
-                  size="md"
+                  size="sm"
                   src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
                 />
               </Dropdown.Trigger>
@@ -86,23 +97,16 @@ const Header = () => {
           </Dropdown>
         </Navbar.Content>
         <Navbar.Collapse>
-          {collapseItems.map((item, index) => (
-            <Navbar.CollapseItem
-              key={item}
-              activeColor="secondary"
-              css={{
-                color: index === collapseItems.length - 1 ? "$error" : "",
-              }}
-              isActive={index === 2}
-            >
+          {navbarItems.map((item, i) => (
+            <Navbar.CollapseItem key={i}>
               <Link
-                color="inherit"
+                className={`collapse-item ${i === active ? "active" : ""}`}
                 css={{
                   minWidth: "100%",
                 }}
-                href="#"
+                to={item.path}
               >
-                {item}
+                {item.display}
               </Link>
             </Navbar.CollapseItem>
           ))}
