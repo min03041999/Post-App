@@ -21,6 +21,24 @@ const Header = () => {
   const { pathname } = useLocation();
   const active = navbarItems.findIndex((e) => e.path === pathname);
 
+  const client = [
+    {
+      path: "setting",
+      display: "My Settings",
+      set: true,
+    },
+    {
+      path: "help_and_feedback",
+      display: "Help & Feedback",
+      set: false,
+    },
+    {
+      path: "logout",
+      display: "Log Out",
+      set: true,
+    },
+  ];
+
   return (
     <>
       <Navbar variant="sticky">
@@ -75,24 +93,14 @@ const Header = () => {
                   Signed in as
                 </Text>
                 <Text b color="inherit" css={{ d: "flex" }}>
-                  zoey@example.com
+                  tituscorbin@gmail.com
                 </Text>
               </Dropdown.Item>
-              <Dropdown.Item key="settings" withDivider>
-                My Settings
-              </Dropdown.Item>
-              <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
-              <Dropdown.Item key="analytics" withDivider>
-                Analytics
-              </Dropdown.Item>
-              <Dropdown.Item key="system">System</Dropdown.Item>
-              <Dropdown.Item key="configurations">Configurations</Dropdown.Item>
-              <Dropdown.Item key="help_and_feedback" withDivider>
-                Help & Feedback
-              </Dropdown.Item>
-              <Dropdown.Item key="logout" withDivider color="error">
-                Log Out
-              </Dropdown.Item>
+              {client.map((item, i) => (
+                <Dropdown.Item withDivider={item.set} key={i}>
+                  <Link to={item.path}>{item.display}</Link>
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </Navbar.Content>
