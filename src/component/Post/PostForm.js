@@ -22,8 +22,8 @@ const PostForm = (props) => {
   const [imgProduct, setImgProduct] = useState();
   //Form
   const id = props.postId;
-  if (id) {
-    useEffect(() => {
+  useEffect(() => {
+    if (id) {
       const fetchPost = async () => {
         try {
           const res = await postApi.getPost(id);
@@ -35,8 +35,8 @@ const PostForm = (props) => {
         }
       };
       fetchPost();
-    }, [id]);
-  }
+    }
+  }, [id]);
 
   const { register, handleSubmit, reset } = useForm();
 
