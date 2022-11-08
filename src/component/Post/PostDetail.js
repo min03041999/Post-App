@@ -28,7 +28,7 @@ const PostDetail = (props) => {
       id: data._id,
       title: data.title,
       content: data.content,
-      imageUrl: "http://localhost:8080/" + data.imageUrl,
+      imageUrl: "https://animal-post.herokuapp.com/" + data.imageUrl,
       creator: data.creator.name,
       createdAt: data.createdAt,
       updatedAt: data.updateAt,

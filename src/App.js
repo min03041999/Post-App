@@ -8,12 +8,12 @@ import Client from "./Page/Client";
 
 import "./App.css";
 
-import openSocket from "socket.io-client";
+// import openSocket from "socket.io-client";
 
 function App() {
-  useEffect(() => {
-    openSocket("http://localhost:8080");
-  }, []);
+  // useEffect(() => {
+  //   openSocket("http://localhost:8080");
+  // }, []);
   return (
     <Switch>
       <Route path="/admin" component={AdminPage} />
