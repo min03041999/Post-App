@@ -49,7 +49,7 @@ const PostList = () => {
       id: item._id,
       title: item.title,
       content: item.content,
-      imageUrl: "http://localhost:8080/" + item.imageUrl,
+      imageUrl: "https://animal-post.herokuapp.com/" + item.imageUrl,
       creator: item.creator,
       createdAt: item.createdAt,
       updatedAt: item.updateAt,

@@ -30,7 +30,7 @@ const News = () => {
         <Image
           width={320}
           height={250}
-          src={`http://localhost:8080/` + item.imageUrl}
+          src={`https://animal-post.herokuapp.com/` + item.imageUrl}
           alt="Default Image"
           objectFit="cover"
         />
